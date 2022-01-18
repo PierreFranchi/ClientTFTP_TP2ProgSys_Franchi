@@ -36,7 +36,15 @@ int RRQ (char *fileName, char *mode, int sck, struct addrinfo *result){
 }
 
 int DATA(char *fileName, char *mode, int sck, struct addrinfo *result){
-    
+    char *cmd;
+    int snt;
+    cmd=malloc(2+2+strlen(data));
+    cmd[0]=0;//2 bytes(2octets in english) du opcode
+    cmd[1]=1;
+    cmd[2]=0;//2 bytes de Bloc#
+    cmd[3]=0;
+    strcpy(&cmd[4], data);
+      
     recvfrom(sfd, cmd, snt, flags, NULL, NULL);
     return 
 }

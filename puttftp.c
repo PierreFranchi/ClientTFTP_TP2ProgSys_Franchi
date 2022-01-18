@@ -19,12 +19,12 @@ char fileName[taille_cmd];
 //fonctions
 void affiche(const char*msg){write(STDOUT_FILENO,msg, strlen(msg));}
 
-int RRQ (char *fileName, char *mode, int sck, struct addrinfo *result){
+int WRQ (char *fileName, char *mode, int sck, struct addrinfo *result){
     char *cmd;
     int snt;
     cmd=malloc(2+strlen(fileName)+1+strlen(mode)+1);
-    cmd[0]=0;//2 bytes du opcode
-    cmd[1]=1;
+    cmd[0]=1;//2 bytes du opcode
+    cmd[1]=0;
     strcpy(&cmd[2], fileName);
     cmd[2+strlen(fileName)]=0;
     strcpy(&cmd[2+strlen(fileName)+1],mode);
@@ -34,12 +34,12 @@ int RRQ (char *fileName, char *mode, int sck, struct addrinfo *result){
     free(cmd);
     return(snt);//renvoi la taille de la commande
 }
-
+/*
 int DATA(char *fileName, char *mode, int sck, struct addrinfo *result){
     
     recvfrom(sfd, cmd, snt, flags, NULL, NULL);
     return 
-}
+}*/
 
 //MAIN
 int main (int argc, char* argv[]){
@@ -80,7 +80,7 @@ int main (int argc, char* argv[]){
         fprintf(stderr, "Could not connect.\n");
         exit(EXIT_FAILURE);
     }
-    int tailleCommande=RRQ(argv[2],"octet",sfd,result);
+    int tailleCommande=WRQ(argv[2],"octet",sfd,result);
     return tailleCommande;
 
 }
