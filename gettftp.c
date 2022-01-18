@@ -34,7 +34,7 @@ int RRQ (char *fileName, char *mode, int sck, struct addrinfo *result){
     free(cmd);
     return(snt);//renvoi la taille de la commande
 }
-
+/*
 int DATA(char *fileName, char *mode, int sck, struct addrinfo *result){
     char *cmd;
     int snt;
@@ -47,7 +47,7 @@ int DATA(char *fileName, char *mode, int sck, struct addrinfo *result){
       
     recvfrom(sfd, cmd, snt, flags, NULL, NULL);
     return 
-}
+}*/
 
 //MAIN
 int main (int argc, char* argv[]){
